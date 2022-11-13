@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: postgres
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: postgres
@@ -16,10 +17,13 @@ spec:
         image: postgres:14.5
         ports:
         - containerPort: 5432
-        env:
-          - name: POSTGRES_USER
-            value: kubenewsuser
-          - name: POSTGRES_PASSWORD
-            value: kubenewspwd
-          - name: POSTGRES_DB
-            value: kubenewsdb
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-data
+        envFrom:
+          - secretRef:
+              name: postgres-secret
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
