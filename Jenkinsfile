@@ -9,8 +9,8 @@ pipeline
                 script
                 {
                     git branch: 'main',
-                    git credentialsId: 'GIT_HUB_CREDENTIALS', 
-                    url: 'https://github.com/harrisonmlima/kube-news-kubernetes'
+                        credentialsId: 'GIT_HUB_CREDENTIALS', 
+                        url: 'https://github.com/harrisonmlima/kube-news-kubernetes'
                 }
             }
         }
