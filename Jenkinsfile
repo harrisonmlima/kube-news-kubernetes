@@ -1,17 +1,17 @@
-node
-{
-    stage("Git Clone"){
-
-            git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/harrisonmlima/kube-news-kubernetes'
-    }
-}
 pipeline 
 {
     agent any
-    
     stages 
     {
-        
+        stage('Git Clone'){
+            steps
+            {
+                script
+                {
+                    git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/harrisonmlima/kube-news-kubernetes'
+                }
+            }
+        }
         stage ( 'Build Docker Image')
         {
             steps
