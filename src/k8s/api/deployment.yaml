@@ -58,15 +58,4 @@ spec:
               secretKeyRef:
                 key: POSTGRES_PASSWORD
                 name: postgres-secret
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                topologyKey: kubernetes.io/hostname
-                labelSelector:
-                  matchExpressions:
-                    - key: app
-                      operator: In
-                      values:
-                        - "postgres"
+      
