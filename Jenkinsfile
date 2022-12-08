@@ -51,14 +51,9 @@ pipeline
                 
                 withKubeConfig([credentialsId: 'kubeconfig'])
                 {
-                    withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            
-                        sh 'sed -i "s/{{TAG}}/$tag_version/g" ./src/k8s/api/deployment.yaml'
-                        sh 'kubectl apply -f ./src/k8s -R'
-                    }
+                        
+                    sh 'sed -i "s/{{TAG}}/$tag_version/g" ./src/k8s/api/deployment.yaml'
+                    sh 'kubectl apply -f ./src/k8s -R'
                 }
             
             }
